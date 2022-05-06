@@ -1,0 +1,19 @@
+{
+  "name": "messagerie_chat",
+  "version": "1.0.0",
+  "description": "Chat with socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icom50/chat_messagerie.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icom50/chat_messagerie/issues"
+  },
+  "homepage": "https://github.com/icom50/chat_messagerie#readme"
+}
