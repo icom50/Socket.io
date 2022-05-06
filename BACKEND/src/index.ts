@@ -22,7 +22,7 @@ const server: http.Server = http.createServer(app);
 const io: Server = new Server(server);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.send('Hello world');
 });
 
 io.on('connection', (socket: Socket) => {
