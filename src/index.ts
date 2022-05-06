@@ -1,13 +1,24 @@
-import express from 'express';
+import cors from 'cors';
+import express, { Application } from 'express';
+import favicon from 'serve-favicon';
 
 
-const app = express()
-const port = 3000
+const app: Application = express();
+const port: string | number = 3000;
+
+app
+  // .use(express.static('public'))
+  .use(favicon(__dirname + '/public/favIcon.png'))
+
+  .use(express.urlencoded({ extended: true }))
+  .use(express.json())
+  .use(cors());
+
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile(__dirname + '/index.html');
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log("Server listening on PORT", port);
 })
