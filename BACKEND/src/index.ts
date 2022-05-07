@@ -3,6 +3,7 @@ import express, { Application } from 'express';
 import favicon from 'serve-favicon';
 import http from 'http';
 import { Server, Socket } from 'socket.io';
+import { chat } from './io'
 
 
 const app: Application = express();
@@ -30,18 +31,7 @@ app.get('/', (req, res) => {
   res.status(200).json('hello word');
 });
 
-io.on('connection', (socket: Socket) => {
-  console.log('a user connected');
-
-  socket.on('FromAPI', (msg: string) => {
-    console.log('message: ' + msg);
-    io.emit('FromAPI', msg);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-});
+chat(io);
 
 server.listen(port, () => {
   console.log("Server listening on PORT", port);
