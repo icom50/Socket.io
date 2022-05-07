@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Socket } from "socket.io-client";
 import '../css/Messages.css';
 import { IMessage } from '../models/IMessage';
-import * as _ from 'lodash';
 
 interface MessagesProps {
     socket: Socket;
@@ -20,7 +19,7 @@ const Messages: React.FC<MessagesProps> = ({ socket }) => {
 
     useEffect(() => {
         if (newMessage && newMessage.Id) {
-            const newMessages = _.cloneDeep(messages);
+            const newMessages = [...messages];
             newMessages.push(newMessage);
             setMessages(newMessages);
         }
