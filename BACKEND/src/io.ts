@@ -2,23 +2,19 @@ import { Server, Socket } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const sendMessage = (io: Server, message: any) => {
-    io.emit('message', message);
-}
-
-const handleMessage = (io: Server, Value: any) => {
+const sendMessage = (io: Server, Value: any) => {
     const message = {
         Id: uuidv4(),
         Value,
         Date: Date.now()
     };
-    sendMessage(io, message);
+    io.emit('message', message);
 }
 
 export const chat = (io: Server) => {
     io.on('connection', (socket: Socket) => {
         console.log('User connected')
-        socket.on('message', (Value) => handleMessage(io, Value));
+        socket.on('message', (Value) => sendMessage(io, Value));
         socket.on('connect_error', (err) => {
             console.log(`connect_error due to ${err.message}`);
         });

@@ -13,7 +13,6 @@ const Messages: React.FC<MessagesProps> = ({ socket }) => {
 
     useEffect(() => {
         socket.on('message', (msg: IMessage) => {
-            console.log(msg);
             setnewMessage(msg);
         });
     }, []);
