@@ -1,24 +1,23 @@
-import { Socket } from "socket.io-client";
 import MessageInput from "./MessageInput";
 import Messages from "./Messages";
-import './css/Chat.css'
+import '../../css/Chat.css'
+import { useContext } from "react";
+import { AppContext } from "../../contexts/appContext";
 
 
-interface ChatProps {
-    socket: Socket;
-}
+const Chat: React.FC = () => {
 
-const Chat: React.FC<ChatProps> = ({ socket }) => {
+    const { state, dispatch } = useContext(AppContext);
 
     return (
         <div className="App">
             <header className="app-header">
                 React Chat
             </header>
-            {socket ? (
+            {state.Socket ? (
                 <div className="chat-container">
-                    <Messages socket={socket} />
-                    <MessageInput socket={socket} />
+                    <Messages socket={state.Socket} />
+                    <MessageInput socket={state.Socket} />
                 </div>
             ) : (
                 <div>Not Connected</div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../css/MessageInput.css';
+import '../../css/MessageInput.css';
 import { Socket } from "socket.io-client";
 
 interface MessageInputProps {

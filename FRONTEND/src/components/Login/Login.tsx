@@ -1,6 +1,7 @@
-import { Col, Input, Row, Space } from 'antd';
+import { Button, Input } from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import '../../css/Login.css'
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
 
@@ -17,11 +18,18 @@ const Login: React.FC = () => {
 
                     <span >
                         <Input.Password
+                            className='inputSpan'
                             width={'200px'}
                             placeholder="Password"
                             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         />
                     </span>
+
+                    <Link to="/dashboard">
+                        <Button type="primary">
+                            Connect
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </div>
