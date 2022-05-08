@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Socket } from "socket.io-client";
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../../contexts/appContext';
 import '../../css/Messages.css';
 import { IMessage } from '../../models/IMessage';
 
-interface MessagesProps {
-    socket: Socket;
-}
 
-const Messages: React.FC<MessagesProps> = ({ socket }) => {
+const Messages: React.FC = () => {
+    const { state } = useContext(AppContext);
+
     const [messages, setMessages] = useState<IMessage[]>([]);
     const [newMessage, setnewMessage] = useState<IMessage>({} as IMessage);
 
     useEffect(() => {
-        socket.on('message', (msg: IMessage) => {
+        state.Socket.on('message', (msg: IMessage) => {
+            console.log(msg)
             setnewMessage(msg);
         });
     }, []);
@@ -34,6 +34,7 @@ const Messages: React.FC<MessagesProps> = ({ socket }) => {
                     className="message-container"
                     title={`Sent at ${new Date(message.Date).toLocaleTimeString()}`}
                 >
+                    <span className="user">{message.User.Name}:</span>
                     <span className="message">{message.Value}</span>
                     <span className="date">{new Date(message.Date).toLocaleTimeString()}</span>
                 </div>

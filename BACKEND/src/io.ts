@@ -2,14 +2,16 @@ import { Server, Socket } from 'socket.io';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const sendMessage = (io: Server, Value: any) => {
-    const message = {
+const sendMessage = (io: Server, message: any) => {
+    console.log({message});
+    const messageRetrieved = {
         Id: uuidv4(),
-        Value,
+        Value: message.Value,
+        User: message.User,
         Date: Date.now()
     };
     console.log({message});
-    io.emit('message', message);
+    io.emit('message', messageRetrieved);
 }
 
 export const chat = (io: Server) => {

@@ -1,22 +1,29 @@
 import * as React from 'react';
 import { createContext, useReducer } from 'react';
 import { Socket } from 'socket.io-client';
+import { IUser, Users } from '../models/IUsers';
 
 interface IAppState {
     Socket: Socket;
+    Users: IUser[];
+    CurrentUser: IUser;
 }
 
 const initialStateApp = {
     Socket: {} as Socket,
+    Users: Users,
+    CurrentUser: {} as IUser
 };
 
 export enum IAppActionType {
     SetSocket = 'SetSocket',
+    SetCurrentUser = 'SetCurrentUser',
 }
 
 type IAppDispatch = {
     type: IAppActionType;
     Socket?: Socket;
+    User?: IUser;
 };
 
 function appReducer(state: IAppState = initialStateApp, action: IAppDispatch): IAppState {
@@ -25,6 +32,11 @@ function appReducer(state: IAppState = initialStateApp, action: IAppDispatch): I
             return {
                 ...state,
                 Socket: action.Socket || {} as Socket
+            };
+        case 'SetCurrentUser':
+            return {
+                ...state,
+                CurrentUser: action.User || {} as IUser
             };
         default:
             return state;

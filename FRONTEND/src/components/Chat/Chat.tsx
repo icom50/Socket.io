@@ -7,17 +7,17 @@ import { AppContext } from "../../contexts/appContext";
 
 const Chat: React.FC = () => {
 
-    const { state, dispatch } = useContext(AppContext);
+    const { state } = useContext(AppContext);
 
     return (
         <div className="App">
             <header className="app-header">
                 React Chat
             </header>
-            {state.Socket ? (
+            {state.Socket.connected ? (
                 <div className="chat-container">
-                    <Messages socket={state.Socket} />
-                    <MessageInput socket={state.Socket} />
+                    <Messages />
+                    <MessageInput />
                 </div>
             ) : (
                 <div>Not Connected</div>

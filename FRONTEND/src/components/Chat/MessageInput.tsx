@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AppContext } from '../../contexts/appContext';
 import '../../css/MessageInput.css';
-import { Socket } from "socket.io-client";
+import { IMessage } from '../../models/IMessage';
 
-interface MessageInputProps {
-    socket: Socket;
-}
 
-const MessageInput: React.FC<MessageInputProps> = ({ socket }) => {
+const MessageInput: React.FC = () => {
+    const { state } = useContext(AppContext);
+
     const [Value, setValue] = useState('');
     const submitForm = (e: any) => {
         e.preventDefault();
-        socket.emit('message', Value);
+        const message : IMessage = {
+            Value: Value,
+            User: state.CurrentUser
+        } as IMessage
+        state.Socket.emit('message', message);
         setValue('');
     };
 
