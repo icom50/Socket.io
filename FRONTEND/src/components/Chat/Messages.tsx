@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Socket } from "socket.io-client";
 import '../css/Messages.css';
-import { IMessage } from '../models/IMessage';
+import { IMessage } from '../../models/IMessage';
 
 interface MessagesProps {
     socket: Socket;
